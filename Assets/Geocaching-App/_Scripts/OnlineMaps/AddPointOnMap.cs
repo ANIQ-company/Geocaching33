@@ -5,44 +5,34 @@ using UnityEngine;
 [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/AddPointOnMap")]
 public class AddPointOnMap : MonoBehaviour
 {
+    [SerializeField] private GameObject userCanvas;
+    [SerializeField] private GameObject adminCanvas;
+
     // Marker, which should display the location.
     private OnlineMapsMarker playerMarker;
 
     private OnlineMapsMarkerManager _markerManager;
     private OnlineMapsLocationService _locationService;
 
-    public void OnButtonCreateMarker()
+    private void Start()
     {
-        // Create a new marker.
-        playerMarker = OnlineMapsMarkerManager.CreateItem(new Vector2(0, 0), null, "Player");
-        Debug.Log("Marker Created: " + playerMarker);
-
-        _locationService = OnlineMapsLocationService.instance;
-        Debug.Log("Got location service: " + _locationService);
-
-        if (_locationService == null)
-        {
-            Debug.LogError(
-                "Location Service not found.\nAdd Location Service Component (Component / Infinity Code / Online Maps / Plugins / Location Service).");
-            return;
-        }
-
-
-        // Subscribe to the change location event.
-        _locationService.OnLocationChanged += OnLocationChanged;
-        Debug.Log("Subscribe to the change location event");
+        // Subscribe to the click event.
+        OnlineMapsControlBase.instance.OnMapClick += OnMapClick;
     }
 
-    // When the location has changed
-    private void OnLocationChanged(Vector2 position)
+    public void OnMapClick()
     {
-        // Change the position of the marker.
-        Debug.Log("Da li si usao?");
-        playerMarker.position = position;
-        Debug.Log("Marker set to gps position: " + position);
+        if (adminCanvas.activeInHierarchy)
+        {
+            // Get the coordinates under the cursor.
+            double lng, lat;
+            OnlineMapsControlBase.instance.GetCoords(out lng, out lat);
 
-        // Redraw map.
-        OnlineMaps.instance.Redraw();
-        Debug.Log("map redraw-ed");
+            // Create a label for the marker.
+            string label = "Marker " + (OnlineMapsMarkerManager.CountItems + 1);
+
+            // Create a new marker.
+            OnlineMapsMarkerManager.CreateItem(lng, lat, label);
+        }
     }
 }

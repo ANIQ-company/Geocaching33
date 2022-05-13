@@ -994,6 +994,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 4654062511372206755, guid: e9514c8b42b2244b88612ec72c0aef58, type: 3}
+      propertyPath: userCanvas
+      value: 
+      objectReference: {fileID: 441836389}
+    - target: {fileID: 4654062511372206755, guid: e9514c8b42b2244b88612ec72c0aef58, type: 3}
+      propertyPath: adminCanvas
+      value: 
+      objectReference: {fileID: 1831816812688923366}
     - target: {fileID: 9193752129787714564, guid: e9514c8b42b2244b88612ec72c0aef58, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -1982,6 +1990,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: AdminDropdownMenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 334421716309740977, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1823455531517360603, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2000,7 +2012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1831816813980558010, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1831816813980558014, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
       propertyPath: m_Pivot.x
@@ -2212,7 +2224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491768181192238319, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnButtonCreateMarker
+      value: OnMapClick
       objectReference: {fileID: 0}
     - target: {fileID: 8491768181192238319, guid: 562225a74c3934a15a4e39a2a369b9f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -2845,7 +2857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012731933873079107, guid: 24299d591ce50477eae313737f17c917, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7012731933873079111, guid: 24299d591ce50477eae313737f17c917, type: 3}
       propertyPath: m_Pivot.x
