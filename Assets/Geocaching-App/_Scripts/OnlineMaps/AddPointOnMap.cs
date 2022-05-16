@@ -3,11 +3,13 @@ using Photon.Pun;
 using UnityEngine;
 
 [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/AddPointOnMap")]
-public class AddPointOnMap : MonoBehaviour
+public class AddPointOnMap : MonoBehaviour, IPunObservable
 {
     [SerializeField] private GameObject userCanvas;
     [SerializeField] private GameObject adminCanvas;
 
+    public PhotonView _photonView;
+    
     // Marker, which should display the location.
     private OnlineMapsMarker playerMarker;
 
@@ -33,6 +35,29 @@ public class AddPointOnMap : MonoBehaviour
 
             // Create a new marker.
             OnlineMapsMarkerManager.CreateItem(lng, lat, label);
+            _photonView.RPC(nameof(SendMessage), RpcTarget.AllBuffered, lat,lng);
+            Debug.Log("Photon view sent message!");
         }
+    }
+
+    [PunRPC]
+    private void SendMessage(double lng, double lat, string label)
+    {
+        Debug.Log("Create marker"!);
+        OnlineMapsMarkerManager.CreateItem(lng, lat, label);
+    }
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        Debug.Log("Photon Serialized view");
+        double lng, lat;
+        OnlineMapsControlBase.instance.GetCoords(out lng, out lat);
+        Debug.Log("Longitude: " + lng + "\n Latitude: " + lat);
+        
+        string label = "Marker " + (OnlineMapsMarkerManager.CountItems + 1);
+        stream.SendNext(OnlineMapsMarkerManager.CreateItem(lng,lat, label));
+        Debug.Log("Send to server to create marker");
+        
     }
 }
