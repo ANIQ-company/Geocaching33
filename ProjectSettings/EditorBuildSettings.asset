@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Geocaching-App/Scene/Loading.unity
-    guid: dc610b12ccea64c3c904b96b9beba5fb
+    path: Assets/Geocaching-App/Scene/Nenad/Lobby Nenad.unity
+    guid: 3812c10a7c580f948a794288cb3366b5
   - enabled: 1
-    path: Assets/Geocaching-App/Scene/Lobby.unity
-    guid: 230e0ef345681424896e5870be8f940d
+    path: Assets/Geocaching-App/Scene/Nenad/Loading Nenad.unity
+    guid: 21a848c48c21a934caf55829540dcf64
   - enabled: 1
-    path: Assets/Geocaching-App/Scene/MainScene.unity
-    guid: 7ab4f4ee547b94709afa229120601cdb
+    path: Assets/Geocaching-App/Scene/Nenad/MainScene Nenad.unity
+    guid: 97a6230b152856948aca9e1813e9f380
   m_configObjects: {}

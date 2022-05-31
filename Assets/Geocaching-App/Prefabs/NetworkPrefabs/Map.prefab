@@ -226,7 +226,7 @@ MonoBehaviour:
   source: 0
   stopPlayingWhenScriptsCompile: 1
   texture: {fileID: 0}
-  tooltipBackgroundTexture: {fileID: 0}
+  tooltipBackgroundTexture: {fileID: 2800000, guid: a8d1734e646100c4e83635fecf978e15, type: 3}
   traffic: 0
   trafficProviderID: googlemaps
   useCurrentZoomTiles: 0
@@ -679,7 +679,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4654062511372206755}
-  - {fileID: 0}
+  - {fileID: 6541634269663690403}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
