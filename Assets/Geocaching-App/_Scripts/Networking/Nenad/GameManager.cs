@@ -8,7 +8,6 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public int sceneToLoad;
-    public int ID;
 
     PhotonView view;
 
@@ -21,17 +20,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             view = PhotonView.Get(this);
-            if (!view.IsMine)
-            {
-                InstantiatePlayerMarker();
-            }
-            else InstantiatePlayerMarker();
         }
     }
-
-    private void InstantiatePlayerMarker()
+    public void RequestUsernameUpdate(string name)
     {
-        PhotonNetwork.Instantiate("PlayerMarker", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.LocalPlayer.NickName = name;
+        print(name);
     }
 
     public override void OnLeftRoom()
@@ -42,6 +36,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
     }
 
     void LoadMainScene()

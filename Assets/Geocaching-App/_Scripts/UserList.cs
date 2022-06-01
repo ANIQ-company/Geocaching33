@@ -16,7 +16,7 @@ public class UserList : MonoBehaviour
     public Button loginButton;
 
     private PlayerPrefs usernameSave;
-    
+
     private readonly Dictionary<string, string> adminLoginDetails = new Dictionary<string, string>
     {
         {"admin0", "admin0"},
@@ -64,6 +64,7 @@ public class UserList : MonoBehaviour
             loginCanvas.SetActive(false);
             userCanvas.SetActive(true);
             PlayerPrefs.SetString("username", userName);
+            FindObjectOfType<GameManager>().RequestUsernameUpdate(userName);
         }
         else if (adminLoginDetails.TryGetValue(userName, out foundPassword) && foundPassword == password)
         {
@@ -71,6 +72,7 @@ public class UserList : MonoBehaviour
             loginCanvas.SetActive(false);
             adminCanvas.SetActive(true);
             PlayerPrefs.SetString("admin", userName);
+            FindObjectOfType<GameManager>().RequestUsernameUpdate(userName);
         }
 
         else

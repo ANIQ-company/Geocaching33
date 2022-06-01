@@ -195,6 +195,7 @@ MonoBehaviour:
   userNameField: {fileID: 5703644898565272327}
   passwordField: {fileID: 1711243829}
   loginButton: {fileID: 2918316224283599807}
+  username: 
 --- !u!4 &54722634
 Transform:
   m_ObjectHideFlags: 0
@@ -4847,7 +4848,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719226591710050854}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f9052b8f1255a04b9d0402333b78a57, type: 3}
   m_Name: 
