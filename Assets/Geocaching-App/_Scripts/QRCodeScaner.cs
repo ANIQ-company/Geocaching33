@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ZXing;
@@ -14,6 +15,9 @@ public class QRCodeScaner : MonoBehaviour
     [SerializeField] private Text textOut;
     [SerializeField] private RectTransform scanZone;
     [SerializeField] private GameObject mapPlane;
+    [SerializeField] private Text scanedURL;
+
+    [SerializeField] private List<string> urlText = new List<string>();
 
     public bool isScanSuccessful;
 
@@ -87,8 +91,24 @@ public class QRCodeScaner : MonoBehaviour
             Result result = barcodeReader.Decode(_camTexture.GetPixels32(), _camTexture.width, _camTexture.height);
             if (result != null)
             {
-                textOut.text = result.Text;
-                isScanSuccessful = true;
+                if (urlText.Contains(textOut.ToString()))
+                {
+                    textOut.text = "ALREADY SCANNED!";
+                    Debug.Log("Trying to scan same code!");
+                    //ResetScanBool();
+                }
+                else
+                {
+                    textOut.text = result.Text;
+                    urlText.Add(textOut.ToString());
+                    Debug.Log(urlText.Capacity);
+                    isScanSuccessful = true;
+                }
+
+                foreach (var l in urlText)
+                {
+                    Debug.Log(urlText.ToString());
+                }
             }
             else
             {
