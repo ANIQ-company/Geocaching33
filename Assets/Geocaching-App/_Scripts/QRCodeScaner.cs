@@ -91,7 +91,8 @@ public class QRCodeScaner : MonoBehaviour
             Result result = barcodeReader.Decode(_camTexture.GetPixels32(), _camTexture.width, _camTexture.height);
             if (result != null)
             {
-                if (urlText.Contains(textOut.ToString()))
+                
+                if (urlText.Contains(result.Text))
                 {
                     textOut.text = "ALREADY SCANNED!";
                     Debug.Log("Trying to scan same code!");
@@ -99,14 +100,16 @@ public class QRCodeScaner : MonoBehaviour
                 }
                 else
                 {
-                    textOut.text = result.Text;
-                    urlText.Add(textOut.ToString());
+                    //textOut.text = result.Text;
+                    urlText.Add(result.Text);
                     Debug.Log(urlText.Capacity);
                     isScanSuccessful = true;
+                    
                 }
 
-                foreach (var l in urlText)
+                foreach (var url in urlText)
                 {
+                    textOut.text = url;
                     Debug.Log(urlText.ToString());
                 }
             }
@@ -130,6 +133,7 @@ public class QRCodeScaner : MonoBehaviour
             scanCanvas.SetActive(false);
             userCanvas.SetActive(true);
             mapPlane.SetActive(true);
+            Application.OpenURL(textOut.text);
         }
     }
 }
