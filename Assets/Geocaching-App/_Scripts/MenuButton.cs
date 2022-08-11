@@ -15,7 +15,8 @@ public class MenuButton : MonoBehaviour
         scanCanvas,
         MapPlane;
 
-
+    [SerializeField] private Sprite hamburgerMenu, xMenu;
+    [SerializeField] private Image adminDropdownImage, userDropdownImage;
     private UserList _userList;
 
     private void Start()
@@ -28,10 +29,12 @@ public class MenuButton : MonoBehaviour
         if (!adminPanel.activeSelf)
         {
             adminPanel.SetActive(true);
+            adminDropdownImage.sprite = xMenu;
             adminText.text = PlayerPrefs.GetString("admin");
         }
         else if (adminPanel.activeSelf)
         {
+            adminDropdownImage.sprite = hamburgerMenu;
             adminPanel.SetActive(false);
         }
     }
@@ -41,10 +44,12 @@ public class MenuButton : MonoBehaviour
         if (!userPanel.activeSelf)
         {
             userPanel.SetActive(true);
+            userDropdownImage.sprite = xMenu;
             userText.text = PlayerPrefs.GetString("username");
         }
         else if (userPanel.activeSelf)
         {
+            userDropdownImage.sprite = hamburgerMenu;
             userPanel.SetActive(false);
         }
     }

@@ -236,6 +236,10 @@ MonoBehaviour:
   adminPanel: {fileID: 1854943005}
   scanCanvas: {fileID: 1148852062}
   MapPlane: {fileID: 0}
+  hamburgerMenu: {fileID: 21300000, guid: 9022c3978a8cc41968435bc4ea472a06, type: 3}
+  xMenu: {fileID: 21300000, guid: 817b8b666d98fed4b9f4bd6b19d26a4d, type: 3}
+  adminDropdownImage: {fileID: 1580741467484329264}
+  userDropdownImage: {fileID: 0}
 --- !u!114 &54722632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3303,7 +3307,7 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 0
+  m_HideMobileInput: 1
   m_CharacterValidation: 0
   m_CharacterLimit: 0
   m_OnEndEdit:
@@ -3851,7 +3855,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 700
     m_Bottom: 600
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -4773,7 +4777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 817b8b666d98fed4b9f4bd6b19d26a4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9022c3978a8cc41968435bc4ea472a06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6438,7 +6442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3868704690935418730
 GameObject:
   m_ObjectHideFlags: 0
@@ -6784,7 +6788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 817b8b666d98fed4b9f4bd6b19d26a4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9022c3978a8cc41968435bc4ea472a06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8833,7 +8837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 562.5, y: -1130}
+  m_AnchoredPosition: {x: 562.5, y: -1050}
   m_SizeDelta: {x: 450, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7963810720576233848
