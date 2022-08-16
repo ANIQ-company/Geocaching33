@@ -34,54 +34,6 @@ namespace InfinityCode.OnlineMapsExamples
         private OnlineMaps map;
         private OnlineMapsControlBase control;
 
-        private void FixedUpdate()
-        {
-            if (isSmoothZoomProceed || waitZeroTouches) return;
-
-            // If there is interaction with the map.
-            if (isInteract)
-            {
-                // Calculates speeds.
-                double tx, ty;
-                map.GetTilePosition(out tx, out ty);
-                double cSpeedX = tx - ptx;
-                double cSpeedY = ty - pty;
-
-                int halfMax = 1 << (map.zoom - 1);
-                int max = 1 << map.zoom;
-                if (cSpeedX > halfMax) cSpeedX -= max;
-                else if (cSpeedX < -halfMax) cSpeedX += max;
-
-                while (speedX.Count >= maxSamples) speedX.RemoveAt(0);
-                while (speedY.Count >= maxSamples) speedY.RemoveAt(0);
-
-                speedX.Add(cSpeedX);
-                speedY.Add(cSpeedY);
-
-                ptx = tx;
-                pty = ty;
-            }
-            // If no interaction with the map.
-            else if (rsX * rsX + rsY * rsY > 0.001)
-            {
-                // Continue to move the map with the current speed.
-                double tx, ty;
-                map.GetTilePosition(out tx, out ty);
-                tx += rsX;
-                ty += rsY;
-
-                int max = 1 << map.zoom;
-                if (tx >= max) tx -= max;
-                else if (tx < 0) tx += max;
-
-                map.SetTilePosition(tx, ty);
-
-                // Reduces the current speed.
-                rsX *= friction;
-                rsY *= friction;
-            }
-        }
-
         /// <summary>
         /// This method is called when you press on the map.
         /// </summary>
@@ -156,6 +108,54 @@ namespace InfinityCode.OnlineMapsExamples
             // Initialize arrays of speed
             speedX = new List<double>(maxSamples);
             speedY = new List<double>(maxSamples);
+        }
+
+        private void Update()
+        {
+            if (isSmoothZoomProceed || waitZeroTouches) return;
+
+            // If there is interaction with the map.
+            if (isInteract)
+            {
+                // Calculates speeds.
+                double tx, ty;
+                map.GetTilePosition(out tx, out ty);
+                double cSpeedX = tx - ptx;
+                double cSpeedY = ty - pty;
+
+                int halfMax = 1 << (map.zoom - 1);
+                int max = 1 << map.zoom;
+                if (cSpeedX > halfMax) cSpeedX -= max;
+                else if (cSpeedX < -halfMax) cSpeedX += max;
+
+                while (speedX.Count >= maxSamples) speedX.RemoveAt(0);
+                while (speedY.Count >= maxSamples) speedY.RemoveAt(0);
+
+                speedX.Add(cSpeedX);
+                speedY.Add(cSpeedY);
+
+                ptx = tx;
+                pty = ty;
+            }
+            // If no interaction with the map.
+            else if (rsX * rsX + rsY * rsY > 0.001)
+            {
+                // Continue to move the map with the current speed.
+                double tx, ty;
+                map.GetTilePosition(out tx, out ty);
+                tx += rsX;
+                ty += rsY;
+
+                int max = 1 << map.zoom;
+                if (tx >= max) tx -= max;
+                else if (tx < 0) tx += max;
+
+                map.SetTilePosition(tx, ty);
+
+                // Reduces the current speed.
+                rsX *= friction;
+                rsY *= friction;
+            }
         }
     }
 }

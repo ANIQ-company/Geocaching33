@@ -1,21 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Photon.Pun;
 using UnityEngine;
 
 public class SetNewMarker : MonoBehaviour
 {
-    /// <summary>
-    /// Example of how to dynamically create a 2D marker in the GPS locations of user.
-    /// </summary>
-    [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/Marker_GPS_Example")]
-
-    // Marker, which should display the location.
+    [SerializeField] private GameObject flagPrefab;
+    
     private OnlineMapsMarker playerMarker;
+    public PhotonView photonView;
 
-    public void CreateNewMarker()
+    private OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker> _onlineMapsInteractiveElements;
+
+    private void Start()
     {
+        _onlineMapsInteractiveElements =
+            FindObjectOfType<OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker>>();
+        photonView = PhotonView.Get(this);
+    }
+
+
+    public void RemoveMarker()
+    {
+        _onlineMapsInteractiveElements.Remove(playerMarker, true);
+    }
+    public void OnButtonAddMarker()
+    {
+        
         // Create a new marker.
-        playerMarker = OnlineMapsMarkerManager.CreateItem(new Vector2(0, 0), null, "Player");
+        playerMarker = OnlineMapsMarkerManager.CreateItem(new Vector2(0, 0), null,"Marker");
 
         // Get instance of LocationService.
         OnlineMapsLocationService locationService = OnlineMapsLocationService.instance;

@@ -214,7 +214,7 @@ public abstract class OnlineMapsBuildingBase:MonoBehaviour
 
         RaycastHit hit;
         OnlineMapsControlBaseDynamicMesh control = container.control;
-        return buildingCollider.Raycast(control.activeCamera.ScreenPointToRay(control.GetInputPosition()), out hit, OnlineMapsUtils.maxRaycastDistance);
+        return buildingCollider.Raycast(control.currentCamera.ScreenPointToRay(control.GetInputPosition()), out hit, OnlineMapsUtils.maxRaycastDistance);
     }
 
     /// <summary>

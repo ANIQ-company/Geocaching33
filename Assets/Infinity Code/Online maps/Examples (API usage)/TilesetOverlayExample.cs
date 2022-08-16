@@ -12,15 +12,23 @@ namespace InfinityCode.OnlineMapsExamples
     [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/TilesetOverlayExample")]
     public class TilesetOverlayExample : MonoBehaviour
     {
+        /// <summary>
+        /// Overlay material.
+        /// If missed, a new material with Transparent/Diffuse shader will be used.
+        /// If present, the texture field will be ignored and you must specify the texture directly in the material.
+        /// </summary>
+        public Material material;
+        
         // Overlay texture in mercator projection
         public Texture texture;
 
         // Overlay transparency
         [Range(0, 1)] public float alpha = 1;
 
+        public OnlineMapsTileSetControl control;
+        
+        public OnlineMaps map;
         private Mesh overlayMesh;
-        private Material material;
-        private Collider tilesetCollider;
 
         private void Start()
         {
@@ -31,8 +39,12 @@ namespace InfinityCode.OnlineMapsExamples
             // Init overlay material
             MeshRenderer meshRenderer = overlayContainer.AddComponent<MeshRenderer>();
             MeshFilter meshFilter = overlayContainer.AddComponent<MeshFilter>();
-            material = new Material(Shader.Find("Transparent/Diffuse"));
-            material.mainTexture = texture;
+            if (material == null)
+            {
+                material = new Material(Shader.Find("Transparent/Diffuse"));
+                material.mainTexture = texture;
+            }
+            
             meshRenderer.sharedMaterial = material;
 
             overlayMesh = meshFilter.sharedMesh = new Mesh();
@@ -40,9 +52,12 @@ namespace InfinityCode.OnlineMapsExamples
             overlayMesh.MarkDynamic();
             overlayMesh.vertices = new Vector3[4];
 
+            if (control == null) control = OnlineMapsTileSetControl.instance;
+
             // Subscribe to events
-            OnlineMaps.instance.OnChangePosition += UpdateMesh;
-            OnlineMaps.instance.OnChangeZoom += UpdateMesh;
+            map = control.map;
+            map.OnChangePosition += UpdateMesh;
+            map.OnChangeZoom += UpdateMesh;
 
             // Init mesh
             UpdateMesh();
@@ -50,9 +65,6 @@ namespace InfinityCode.OnlineMapsExamples
 
         private void UpdateMesh()
         {
-            OnlineMapsTileSetControl control = OnlineMapsTileSetControl.instance;
-            if (tilesetCollider == null) tilesetCollider = control.GetComponent<Collider>();
-
             // Clear overlay mesh
             overlayMesh.Clear(true);
 
@@ -78,8 +90,6 @@ namespace InfinityCode.OnlineMapsExamples
             };
 
             // Init overlay UV
-            OnlineMaps map = OnlineMaps.instance;
-
             double tlx, tly, brx, bry;
             map.GetTileCorners(out tlx, out tly, out brx, out bry);
 

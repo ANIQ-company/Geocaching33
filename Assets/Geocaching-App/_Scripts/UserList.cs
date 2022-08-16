@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,10 @@ public class UserList : MonoBehaviour
 
     [SerializeField] private Text errorText;
 
-    [Space] public InputField userNameField;
-    public InputField passwordField;
+    [Space] //public InputField userNameField;
+    public TMP_InputField userNameField;
+   //public InputField passwordField;
+    public TMP_InputField passwordField;
     public Button loginButton;
 
     private PlayerPrefs usernameSave;
