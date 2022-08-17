@@ -13,7 +13,8 @@ public class MenuButton : MonoBehaviour
         userPanel,
         adminPanel,
         scanCanvas,
-        MapPlane;
+        MapPlane,
+        removeMarkerButton;
 
     [SerializeField] private Sprite hamburgerMenu, xMenu;
     [SerializeField] private Image adminDropdownImage, userDropdownImage;
@@ -29,12 +30,14 @@ public class MenuButton : MonoBehaviour
         if (!adminPanel.activeSelf)
         {
             adminPanel.SetActive(true);
+            removeMarkerButton.SetActive(false);
             adminDropdownImage.sprite = xMenu;
             adminText.text = PlayerPrefs.GetString("admin");
         }
         else if (adminPanel.activeSelf)
         {
             adminDropdownImage.sprite = hamburgerMenu;
+            removeMarkerButton.SetActive(true);
             adminPanel.SetActive(false);
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/AddPointOnMap")]
 public class AddPointOnMap : MonoBehaviourPun, IPunObservable
@@ -12,21 +13,28 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
     [SerializeField] private GameObject adminCanvas;
     [SerializeField] private GameObject flagPrefab;
     [SerializeField] private TMP_Text addedMarkerText;
+    [SerializeField] private GameObject markerLabelGameObject;
+    [SerializeField] private TMP_InputField markerLabelInputField;
+    [SerializeField] private Button createMarkerButton;
     double lng, lat;
 
     private List<int> index;
     private int number;
     private bool isCoroutineActive;
     private IEnumerator activeCoroutine;
-    
+
     public PhotonView _photonView;
 
     //private int countItems = OnlineMapsMarkerManager.CountItems + 1;
     private OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker>
         _onlineMapsInteractiveElements;
 
+
+    
+
     private void Start()
     {
+        //markerLabelGameObject.SetActive(false);
         _onlineMapsInteractiveElements =
             FindObjectOfType<OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker>>();
         OnlineMapsControlBase.instance.OnMapClick += OnMapClick;
@@ -50,15 +58,21 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
         if (adminCanvas.activeInHierarchy)
         {
             string label = CreateLocationAndLabel();
+            //markerLabelGameObject.SetActive(true);
 
-            _photonView.RPC("RpcSendMessage", RpcTarget.AllBufferedViaServer, lng, lat, label);
-            Debug.Log("Photon view sent message!");
+            //createMarkerButton.onClick.AddListener(delegate { OnClickCreateMarker(label); });
 
             number++;
 
+            _photonView.RPC("RpcSendMessage", RpcTarget.AllBufferedViaServer, lng, lat, label);
             StartCoroutine(nameof(AddPointText));
             isCoroutineActive = true;
         }
+    }
+
+    public void OnClickCreateMarker(string label)
+    {
+        Debug.Log("Photon view sent message!");
     }
 
     private IEnumerator AddPointText()
@@ -82,6 +96,7 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
         OnlineMapsControlBase.instance.GetCoords(out lng, out lat);
 
         // Create a label for the marker.
+        //string label = markerLabelInputField.text;
         string label = "Marker " + (OnlineMapsMarkerManager.CountItems + 1);
         return label;
     }
