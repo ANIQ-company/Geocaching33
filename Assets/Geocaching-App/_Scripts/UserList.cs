@@ -8,7 +8,8 @@ public class UserList : MonoBehaviour
     [SerializeField] public GameObject
         adminCanvas,
         loginCanvas,
-        userCanvas;
+        userCanvas,
+        mapPlane;
 
     [SerializeField] private Text errorText;
 
@@ -66,6 +67,7 @@ public class UserList : MonoBehaviour
             Debug.Log("User authenticated");
             loginCanvas.SetActive(false);
             userCanvas.SetActive(true);
+            mapPlane.SetActive(true);
             PlayerPrefs.SetString("username", userName);
             FindObjectOfType<GameManager>().RequestUsernameUpdate(userName);
         }
@@ -74,6 +76,7 @@ public class UserList : MonoBehaviour
             Debug.Log("Admin authenticated");
             loginCanvas.SetActive(false);
             adminCanvas.SetActive(true);
+            mapPlane.SetActive(true);
             PlayerPrefs.SetString("admin", userName);
             FindObjectOfType<GameManager>().RequestUsernameUpdate(userName);
         }

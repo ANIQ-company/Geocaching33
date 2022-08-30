@@ -14,15 +14,22 @@ public class MenuButton : MonoBehaviour
         adminPanel,
         scanCanvas,
         MapPlane,
-        removeMarkerButton;
+        removeMarkerButton,
+        addPointOnMapText;
 
     [SerializeField] private Sprite hamburgerMenu, xMenu;
     [SerializeField] private Image adminDropdownImage, userDropdownImage;
+
+    [SerializeField] private OnlineMapsMarkerManager _markerManager;
+    //[SerializeField] private AddPointOnMap _addPointOnMapText;
+    
     private UserList _userList;
 
     private void Start()
     {
         _userList = FindObjectOfType<UserList>();
+        _markerManager = GetComponent<OnlineMapsMarkerManager>();
+        
     }
 
     public void AdminDropdownMenuButton()
@@ -32,12 +39,14 @@ public class MenuButton : MonoBehaviour
             adminPanel.SetActive(true);
             removeMarkerButton.SetActive(false);
             adminDropdownImage.sprite = xMenu;
+            addPointOnMapText.SetActive(false);
             adminText.text = PlayerPrefs.GetString("admin");
         }
         else if (adminPanel.activeSelf)
         {
             adminDropdownImage.sprite = hamburgerMenu;
             removeMarkerButton.SetActive(true);
+            addPointOnMapText.SetActive(true);
             adminPanel.SetActive(false);
         }
     }

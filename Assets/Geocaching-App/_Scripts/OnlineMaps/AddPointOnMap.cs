@@ -12,7 +12,7 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
     [SerializeField] private GameObject userCanvas;
     [SerializeField] private GameObject adminCanvas;
     [SerializeField] private GameObject flagPrefab;
-    [SerializeField] private TMP_Text addedMarkerText;
+    [SerializeField] public TMP_Text addedMarkerText;
     [SerializeField] private GameObject markerLabelGameObject;
     [SerializeField] private TMP_InputField markerLabelInputField;
     [SerializeField] private Button createMarkerButton;
@@ -44,7 +44,7 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
         OnlineMapsControlBase.instance.OnMapClick += OnMapClick;
         _photonView = PhotonView.Get(this);
         _locationService = FindObjectOfType<OnlineMapsLocationService>();
-        
+
         number = 1;
     }
 
@@ -86,15 +86,13 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
                     _markerManager.GetComponent<OnlineMapsMarkerManager>().enabled = false;
                 }
                 //createMarkerButton.onClick.AddListener(delegate { OnClickCreateMarker(label); });
-
-                isCoroutineActive = true;
-                
             }
         }
     }
 
     public void OnClickCreateMarker()
     {
+        isCoroutineActive = true;
         labelText = markerLabelInputField.text;
         string label = CreateLocationAndLabel();
         _photonView.RPC("RpcSendMessage", RpcTarget.AllBufferedViaServer, lng, lat, label);
