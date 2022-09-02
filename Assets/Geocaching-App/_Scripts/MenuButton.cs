@@ -37,6 +37,7 @@ public class MenuButton : MonoBehaviour
         if (!adminPanel.activeSelf)
         {
             adminPanel.SetActive(true);
+            MapPlane.SetActive(false);
             removeMarkerButton.SetActive(false);
             adminDropdownImage.sprite = xMenu;
             addPointOnMapText.SetActive(false);
@@ -45,6 +46,7 @@ public class MenuButton : MonoBehaviour
         else if (adminPanel.activeSelf)
         {
             adminDropdownImage.sprite = hamburgerMenu;
+            MapPlane.SetActive(true);
             removeMarkerButton.SetActive(true);
             addPointOnMapText.SetActive(true);
             adminPanel.SetActive(false);
@@ -55,12 +57,14 @@ public class MenuButton : MonoBehaviour
     {
         if (!userPanel.activeSelf)
         {
+            MapPlane.SetActive(false);
             userPanel.SetActive(true);
             userDropdownImage.sprite = xMenu;
             userText.text = PlayerPrefs.GetString("username");
         }
         else if (userPanel.activeSelf)
         {
+            MapPlane.SetActive(true);
             userDropdownImage.sprite = hamburgerMenu;
             userPanel.SetActive(false);
         }
