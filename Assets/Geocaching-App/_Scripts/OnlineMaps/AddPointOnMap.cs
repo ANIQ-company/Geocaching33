@@ -29,7 +29,6 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
 
     private OnlineMapsLocationService _locationService;
 
-    //private int countItems = OnlineMapsMarkerManager.CountItems + 1;
     private OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker>
         _onlineMapsInteractiveElements;
 
@@ -38,7 +37,6 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
 
     private void Start()
     {
-        //markerLabelGameObject.SetActive(false);
         _onlineMapsInteractiveElements =
             FindObjectOfType<OnlineMapsInteractiveElementManager<OnlineMapsMarkerManager, OnlineMapsMarker>>();
         OnlineMapsControlBase.instance.OnMapClick += OnMapClick;
@@ -63,9 +61,6 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
 
         _photonView.RPC(nameof(RpcDeleteMarker), RpcTarget.AllBufferedViaServer);
 
-
-        //_onlineMapsInteractiveElements.Remove(OnlineMapsMarkerManager.RemoveItemAt(number), true);
-        //number--;
     }
 
     public void OnMapClick()
@@ -85,7 +80,6 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
                 {
                     _markerManager.GetComponent<OnlineMapsMarkerManager>().enabled = false;
                 }
-                //createMarkerButton.onClick.AddListener(delegate { OnClickCreateMarker(label); });
             }
         }
     }
@@ -118,12 +112,8 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
 
     string CreateLocationAndLabel()
     {
-        // Get the coordinates under the cursor.
-        //OnlineMapsControlBase.instance.GetCoords(out lng, out lat);
-
         // Create a label for the marker.
         string label = labelText;
-        //string label = "Marker " + (OnlineMapsMarkerManager.CountItems + 1);
         return label;
     }
 
@@ -151,7 +141,6 @@ public class AddPointOnMap : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            //ništa ne šaljemo, nisam ni siguran da nešto samim time i primamo ali neka ovo bude ovdje dok ne istestiramo.
         }
         else
         {
